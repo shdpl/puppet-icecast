@@ -1,0 +1,216 @@
+<!-- This file is managed by puppet. Do not modify it manually. -->
+<icecast>
+	<limits>
+		<% if has_variable?(limitClients) -%>
+		<clients><%= limitClients -%></clients>
+		<% end -%>
+		<% if has_variable?(limitSources) -%>
+		<sources><%= limitSources -%></sources>
+		<% end -%>
+		<% if has_variable?(limitQueueSize) -%>
+		<queue-size><%= limitQueueSize -%></queue-size>
+		<% end -%>
+		<% if has_variable?(limitClientTimeout) -%>
+		<client-timeout><%= limitClientTimeout -%></client-timeout>
+		<% end -%>
+		<% if has_variable?(limitHeaderTimeout) -%>
+		<header-timeout><%= limitHeaderTimeout -%></header-timeout>
+		<% end -%>
+		<% if has_variable?(limitSourceTimeout) -%>
+		<source-timeout><%= limitSourceTimeout -%></source-timeout>
+		<% end -%>
+		<% if has_variable?(limitBurstOnConnect) -%>
+		<burst-on-connect><%= limitBurstOnConnect -%></burst-on-connect>
+		<% end -%>
+		<% if has_variable?(limitBurstSize) -%>
+		<burst-size><%= limitBurstSize -%></burst-size>
+		<% end -%>
+	</limits>
+
+	<authentication>
+		<source-password><%= sourcePass -%></source-password>
+
+		<relay-user><%= relayUser -%></relay-user>
+		<relay-password><%= relayPass -%></relay-password>
+
+		<admin-user><%= adminUser -%></admin-user>
+		<admin-password><%= adminPass -%></admin-password>
+	</authentication>
+
+	<% ypDir.each do |dir| -%>
+	<directory>
+		<yp-url><%= dir[0] -%></yp-url>
+		<yp-url-timeout><%= dir[1] -%></yp-url-timeout>
+	</directory>
+	<% end -%>
+
+	<hostname><%= miscHostname -%></hostname>
+	<fileserve><%= miscFileServe -%></fileserve>
+
+	<% miscListenSocket.each do |socket| -%>
+	<listen-socket>
+		<% if socket["bind-address"] -%>
+		<bind-address><%= socket["bind-address"] -%></bind-address>
+		<% end -%>
+		<% if socket["port"] -%>
+		<port><%= socket["port"] -%></port>
+		<% end -%>
+		<% if socket["ssl"] -%>
+		<ssl><%= socket["ssl"] -%></ssl>
+		<% end -%>
+		<% if socket["shoutcast-mount"] -%>
+		<shoutcast-mount><%= socket["shoutcast-mount"] -%></shoutcast-mount>
+		<% end -%>
+		<% if socket["shoutcast-compat"] -%>
+		<shoutcast-compat><%= socket["shoutcast-compat"] -%></shoutcast-compat>
+		<% end -%>
+	</listen-socket>
+	<% end -%>
+
+	<% if @masterServer -%>
+	<master-server><%= masterServer["host"] -%></master-server>
+	<master-server-port><%= masterServer["port"] -%></master-server-port>
+	<master-update-interval><%= masterServer["updateInterval"] -%></master-update-interval>
+	<master-username><%= masterServer["username"] -%></master-username>
+	<master-password><%= masterServer["password"] -%></master-password>
+	<relays-on-demand><%= masterServer["onDemand"] -%></relays-on-demand>
+	<% end -%>
+
+	<% relays.each do |relay| -%>
+	<relay>
+		<server><%= relay["server"] -%></server>
+		<port><%= relay["port"] -%></port>
+		<mount><%= relay["mount"] -%></mount>
+		<% if relay["local-mount"] -%>
+		<local-mount><%= relay["local-mount"] -%></local-mount>
+		<% end -%>
+		<% if relay["username"] -%>
+		<username><%= relay["username"] -%></username>
+		<% end -%>
+		<% if relay["password"] -%>
+		<password><%= relay["password"] -%></password>
+		<% end -%>
+		<% if relay["relay-shoutcast-metadata"] -%>
+		<relay-shoutcast-metadata><%= relay["relay-shoutcast-metadata"] -%></relay-shoutcast-metadata>
+		<% end -%>
+		<% if relay["on-demand"] -%>
+		<on-demand><%= relay["on-demand"] -%></on-demand>
+		<% end -%>
+	</relay>
+	<% end -%>
+
+	<% mounts.each do |mount| -%>
+	<mount>
+		<mount-name><%= mount["mount-name"] -%></mount-name>
+		<% if mount["username"] -%>
+		<username><%= mount["username"] -%></username>
+		<% end -%>
+		<% if mount["password"] -%>
+		<password><%= mount["password"] -%></password>
+		<% end -%>
+		<% if mount["max-listeners"] -%>
+		<max-listeners><%= mount["max-listeners"] -%></max-listeners>
+		<% end -%>
+		<% if mount["max-listener-duration"] -%>
+		<max-listener-duration><%= mount["max-listener-duration"] -%></max-listener-duration>
+		<% end -%>
+		<% if mount["dump-file"] -%>
+		<dump-file><%= mount["dump-file"] -%></dump-file>
+		<% end -%>
+		<% if mount["intro"] -%>
+		<intro><%= mount["intro"] -%></intro>
+		<% end -%>
+		<% if mount["fallback-mount"] -%>
+		<fallback-mount><%= mount["fallback-mount"] -%></fallback-mount>
+		<% end -%>
+		<% if mount["fallback-override"] -%>
+		<fallback-override><%= mount["fallback-override"] -%></fallback-override>
+		<% end -%>
+		<% if mount["fallback-when-full"] -%>
+		<fallback-when-full><%= mount["fallback-when-full"] -%></fallback-when-full>
+		<% end -%>
+		<% if mount["charset"] -%>
+		<charset><%= mount["charset"] -%></charset>
+		<% end -%>
+		<% if mount["public"] -%>
+		<public><%= mount["public"] -%></public>
+		<% end -%>
+		<% if mount["stream-name"] -%>
+		<stream-name><%= mount["stream-name"] -%></stream-name>
+		<% end -%>
+		<% if mount["stream-url"] -%>
+		<stream-url><%= mount["stream-url"] -%></stream-url>
+		<% end -%>
+		<% if mount["genre"] -%>
+		<genre><%= mount["genre"] -%></genre>
+		<% end -%>
+		<% if mount["bitrate"] -%>
+		<bitrate><%= mount["bitrate"] -%></bitrate>
+		<% end -%>
+		<% if mount["type"] -%>
+		<type><%= mount["type"] -%></type>
+		<% end -%>
+		<% if mount["subtype"] -%>
+		<subtype><%= mount["subtype"] -%></subtype>
+		<% end -%>
+		<% if mount["burst-size"] -%>
+		<burst-size><%= mount["burst-size"] -%></burst-size>
+		<% end -%>
+		<% if mount["mp3-metadata-interval"] -%>
+		<mp3-metadata-interval><%= mount["mp3-metadata-interval"] -%></mp3-metadata-interval>
+		<% end -%>
+		<% if mount["hidden"] -%>
+		<hidden><%= mount["hidden"] -%></hidden>
+		<% end -%>
+		<% if mount["authentication"] -%>
+		<authentication>
+			<option name="" value=""/>
+		</authentication>
+		<% end -%>
+		<% if mount["on-connect"] -%>
+		<on-connect><%= mount["on-connect"] -%></on-connect>
+		<% end -%>
+		<% if mount["on-disconnect"] -%>
+		<on-disconnect><%= mount["on-disconnect"] -%></on-disconnect>
+		<% end -%>
+	</mount>
+	<% end -%>
+
+	<paths>
+		<basedir><%= pathsBaseDir -%></basedir>
+		<logdir><%= pathsLogDir -%></logdir>
+		<webroot><%= pathsWebRoot -%></webroot>
+		<adminroot><%= pathsAdminRoot -%></adminroot>
+
+		<pidfile><%= pathsPidFile -%></pidfile>
+
+		<% if @allowIp -%>
+		<allow-ip><%= allowIp -%></allow-ip>
+		<% end -%>
+
+		<% if @denyIp -%>
+		<deny-ip><%= denyIp -%></deny-ip>
+		<% end -%>
+
+		<% aliases.each do |al| -%>
+		<alias source="<%= al[0] -%>" dest="<%= al[1] -%>"/>
+		<% end -%>
+	</paths>
+
+	<logging>
+		<accesslog><%= loggingAccessLog -%></accesslog>
+		<errorlog><%= loggingErrorLog -%></errorlog>
+		<playlistlog><%= loggingPlaylistLog -%></playlistlog>
+		<loglevel><%= loggingLogLevel -%></loglevel>
+		<logsize><%= loggingLogSize -%></logsize>
+		<logarchive><%= loggingLogArchive -%></logarchive>
+	</logging>
+
+	<security>
+		<chroot><%= securityChroot -%></chroot>
+		<changeowner>
+			<user><%= endUid -%></user>
+			<group><%= endGid -%></group>
+		</changeowner>
+	</security>
+</icecast>
