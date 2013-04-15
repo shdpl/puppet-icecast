@@ -1,5 +1,0 @@
-[playlist]
-NumberOfEntries=<%= mounts.length %>
-<% mounts.each_with_index do |mount,i| -%>
-File<%=i-%>=http://<%= miscHostname -%>:<%= miscListenSocket[0]["port"] -%><%= mount["mount-name"] %>
-<% end %>
